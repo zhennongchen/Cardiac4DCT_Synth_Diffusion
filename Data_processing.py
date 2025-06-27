@@ -5,8 +5,7 @@ from skimage.measure import block_reduce
 import nibabel as nb
 from scipy.ndimage import map_coordinates
 from scipy import ndimage
-# from dipy.align.reslice import reslice
-import Diffusion_motion_field.functions_collection as ff
+import Cardiac4DCT_Synth_Diffusion.functions_collection as ff
 
 def apply_deformation_field_numpy(moving_image, deformation_field, order = 1):
     """
@@ -293,56 +292,3 @@ def move_3Dimage(image, d):
 
     return crop
 
-
-# def resample_nifti(nifti, 
-#                    order,
-#                    mode, #'nearest' or 'constant' or 'reflect' or 'wrap'    
-#                    cval,
-#                    in_plane_resolution_mm=1.25,
-#                    slice_thickness_mm=None,
-#                    number_of_slices=None):
-    
-#     # sometimes dicom to nifti programs don't define affine correctly.
-#     resolution = np.array(nifti.header.get_zooms()[:3] + (1,))
-#     if (np.abs(nifti.affine)==np.identity(4)).all():
-#         nifti.set_sform(nifti.affine*resolution)
-
-
-#     data   = nifti.get_fdata().copy()
-#     shape  = nifti.shape[:3]
-#     affine = nifti.affine.copy()
-#     zooms  = nifti.header.get_zooms()[:3] 
-
-#     if number_of_slices is not None:
-#         new_zooms = (in_plane_resolution_mm,
-#                      in_plane_resolution_mm,
-#                      (zooms[2] * shape[2]) / number_of_slices)
-#     elif slice_thickness_mm is not None:
-#         new_zooms = (in_plane_resolution_mm,
-#                      in_plane_resolution_mm,
-#                      slice_thickness_mm)            
-#     else:
-#         new_zooms = (in_plane_resolution_mm,
-#                      in_plane_resolution_mm,
-#                      zooms[2])
-
-#     new_zooms = np.array(new_zooms)
-#     for i, (n_i, res_i, res_new_i) in enumerate(zip(shape, zooms, new_zooms)):
-#         n_new_i = (n_i * res_i) / res_new_i
-#         # to avoid rounding ambiguities
-#         if (n_new_i  % 1) == 0.5: 
-#             new_zooms[i] -= 0.001
-
-#     data_resampled, affine_resampled = reslice(data, affine, zooms, new_zooms, order=order, mode=mode , cval = cval)
-#     nifti_resampled = nb.Nifti1Image(data_resampled, affine_resampled)
-
-#     x=nifti_resampled.header.get_zooms()[:3]
-#     y=new_zooms
-#     if not np.allclose(x,y, rtol=1e-02):
-#         print('not all close: ', x,y)
-
-#     return nifti_resampled       
-    
-    
-    
-    

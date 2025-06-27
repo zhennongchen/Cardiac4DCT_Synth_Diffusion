@@ -9,12 +9,12 @@ from einops import rearrange, repeat, reduce
 from scipy.ndimage import zoom
 from skimage.measure import block_reduce
 
-from Diffusion_motion_field.denoising_diffusion_pytorch.denoising_diffusion_pytorch.conditional_diffusion_3D import *
-from Diffusion_motion_field.denoising_diffusion_pytorch.denoising_diffusion_pytorch.conditional_EDM import *
-from Diffusion_motion_field.denoising_diffusion_pytorch.denoising_diffusion_pytorch.version import __version__
+from Cardiac4DCT_Synth_Diffusion.denoising_diffusion_pytorch.denoising_diffusion_pytorch.conditional_diffusion_3D import *
+from Cardiac4DCT_Synth_Diffusion.denoising_diffusion_pytorch.denoising_diffusion_pytorch.conditional_EDM import *
+from Cardiac4DCT_Synth_Diffusion.denoising_diffusion_pytorch.denoising_diffusion_pytorch.version import __version__
 
-import Diffusion_motion_field.functions_collection as ff
-import Diffusion_motion_field.Data_processing as Data_processing
+import Cardiac4DCT_Synth_Diffusion.functions_collection as ff
+import Cardiac4DCT_Synth_Diffusion.Data_processing as Data_processing
 
 # helpers
 

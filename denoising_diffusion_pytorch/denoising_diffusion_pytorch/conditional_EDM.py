@@ -9,12 +9,12 @@ from einops import rearrange, repeat, reduce
 from scipy.ndimage import zoom
 from skimage.measure import block_reduce
 
-from Diffusion_motion_field.denoising_diffusion_pytorch.denoising_diffusion_pytorch.conditional_diffusion_3D import *
-from Diffusion_motion_field.denoising_diffusion_pytorch.denoising_diffusion_pytorch.version import __version__
-from Diffusion_motion_field.denoising_diffusion_pytorch.denoising_diffusion_pytorch.conditional_EDM_warp import *
+from Cardiac4DCT_Synth_Diffusion.denoising_diffusion_pytorch.denoising_diffusion_pytorch.conditional_diffusion_3D import *
+from Cardiac4DCT_Synth_Diffusion.denoising_diffusion_pytorch.denoising_diffusion_pytorch.version import __version__
+from Cardiac4DCT_Synth_Diffusion.denoising_diffusion_pytorch.denoising_diffusion_pytorch.conditional_EDM_warp import *
 
-import Diffusion_motion_field.functions_collection as ff
-import Diffusion_motion_field.Data_processing as Data_processing
+import Cardiac4DCT_Synth_Diffusion.functions_collection as ff
+import Cardiac4DCT_Synth_Diffusion.Data_processing as Data_processing
 
 # helpers
 
@@ -564,7 +564,7 @@ class Sampler(object):
 
 
     def sample_3D_w_trained_model(self, trained_model_filename, cutoff_max = None, cutoff_min = None,
-                save_file = None,  patient_class = None, patient_id = None):
+                save_file = None,  patient_class = None, patient_id = None, image_file = None):
   
         self.load_model(trained_model_filename) 
         
@@ -574,13 +574,8 @@ class Sampler(object):
         # check whether model is on GPU:
         # print('model device: ', next(self.ema.ema_model.parameters()).device)
 
-        # image info (if needed)
-        # image_file = os.path.join('/mnt/camca_NAS/4DCT','models/VAE_embed3/pred_mvf',patient_class,patient_id, 'epoch100', 'pred_latent_tf0.nii.gz')
-        image_file = os.path.join('/mnt/camca_NAS/4DCT','mgh_data/nii-images',patient_class, patient_id, 'img-nii-resampled-1.5mm/0.nii.gz')
         affine = nb.load(image_file).affine
-        # img_info = nb.load(image_file).get_fdata()
-        # scale_factors = (0.5,0.5,1) 
-        # downsampled_img_info = zoom(img_info, scale_factors, order=1)[:,:,slice_range[0]:slice_range[1]]
+
 
         # start to run
         with torch.inference_mode():
@@ -608,9 +603,6 @@ class Sampler(object):
         pred_mvf = pred_mvf.detach().cpu().numpy().squeeze()
         pred_mvf = Data_processing.normalize_image(pred_mvf, normalize_factor = 'equation', image_max = cutoff_max, image_min = cutoff_min, invert = True)
         nb.save(nb.Nifti1Image(np.transpose(pred_mvf,(1,2,3,0)), affine), os.path.join(os.path.dirname(save_file), 'pred_mvf.nii.gz'))
-        print(pred_mvf.shape, np.min(pred_mvf), np.max(pred_mvf))
-
-
         return pred_mvf_saved, EF_pred, pred_mvf
 
     
