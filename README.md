@@ -39,16 +39,17 @@ You should prepare two things before running this step. Please refer to the `exa
 ### Experiments
 we have design our study into 5 steps, with each step having its own jupyter notebook.<br /> 
 **step1: get ground truth MVF**: use ```step1_get_MVF.ipynb```, it uses Voxelmorph generated ground truth MVF for each 4DCT case saved in a folder called ```mvf_warp0_onecase``` <br /> 
+
 **step2: data preparation**: use ```step2_data_preprocessing.ipynb```, it does the following tasks:
-1. Prepare the **left ventricular (LV) segmentation masks** using pre-trained network (in the folder ```segmentation_network```). it should save the segmentation in a folder called ```predicted_seg``` <br /> 
+1. Prepare the left ventricular (LV) segmentation masks using pre-trained network (in the folder ```segmentation_network```). it should save the segmentation in a folder called ```predicted_seg``` <br /> 
 2. Sample the original time frames into **10 evenly spaced cardiac phases** and Get ground truth Ejection fraction (LVEF) for each case. it should save these info in a spreadsheet in ```Patient_lists/example_data/patient_list_final_selection_timeframes``` <br /> 
 3. Prepare augmented data for training (since data is large, on-the-fly augmentation will be time-consuming). it should save the augmented data in a folder called ```mvf_aug``` <br /> 
 
 **step3: train diffusion model**: use ```step3_train_model.ipynb``` <br /> 
+
 **step4: synthesize MVF**: use ```step4_MVF_synthesis.ipynb``` <br /> 
+
 **step5: synthesize 4DCT**: use ```step5_4DCT_synthesis.ipynb```, it applies the synthesized MVF to the 3DCT template for 4DCT generation <br /> 
-
-
 
 ### Additional guidelines 
 Please contact chenzhennong@gmail.com for any further questions.
