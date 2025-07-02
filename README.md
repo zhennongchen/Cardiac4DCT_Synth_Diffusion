@@ -37,7 +37,7 @@ You should prepare two things before running this step. Please refer to the `exa
 
 
 ### Experiments
-we have design our study into 5 steps, with each step having its own jupyter notebook.<br /> 
+we have designed our study into 5 steps, with each step having its own jupyter notebook.<br /> 
 **step1: get ground truth MVF**: use ```step1_get_MVF.ipynb```, it uses Voxelmorph generated ground truth MVF for each 4DCT case saved in a folder called ```mvf_warp0_onecase``` <br /> 
 
 **step2: data preparation**: use ```step2_data_preprocessing.ipynb```, it does the following tasks:
