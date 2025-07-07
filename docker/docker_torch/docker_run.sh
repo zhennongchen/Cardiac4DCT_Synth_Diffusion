@@ -20,4 +20,4 @@ sudo docker run -it --gpus=all --name=docker_ex --network="bridge" --shm-size=25
 -e CONTAINER_GID=${HOST_GROUP_ID} \
 -e CONTAINER_UNAME=${HOST_USER_NAME} \
 -e CONTAINER_WORKDIR=${CONTAINER_WORKDIR} \
-cmr_sam:1.0
+zc_torch:1.0
